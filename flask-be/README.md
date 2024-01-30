@@ -57,5 +57,3 @@ Feel free to open issues for any bugs, feature requests, or questions you may ha
 ## License
 
 This project is licensed under the MIT License. See the [LICENSE](https://github.com/git/git-scm.com/blob/main/MIT-LICENSE.txt) file for more details.
-
-#
