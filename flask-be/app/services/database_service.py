@@ -12,7 +12,7 @@ def configure_mongodb(app):
     app.config['db'] = client
 
 
-def init_app(app):
+def init_database_app(app):
     """
     will create connection and configure the database in app context
     @param app: flask application

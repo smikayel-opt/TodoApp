@@ -1,11 +1,18 @@
 from flask import request, jsonify
 from services.todo_service import get_all_todos, find_todo_by_id, save_todo, delete_todo_by_id, update_one_todo
 from .utils.todo_serializer import todo_serializer
+from middleware import login_required
 
 
 def init_todo_routes(app):
+    """
+    will create the todo routes for the app (todo routes group)
+    @param app: flask application
+    @return:
+    """
     @app.route('/')
-    def index():
+    @login_required
+    def index(user):
         """
         the handler for the get all todos
         @return: response object and the status of the response

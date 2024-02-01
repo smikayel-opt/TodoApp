@@ -1,6 +1,6 @@
 def todo_serializer(todo):
     """
-    Just simple serializer to serialize mongo collection
+    Just simple serializer to serialize mongo collection of the todo
     @param todo: pymongo collection object
     @return: serialized dict object
     """
