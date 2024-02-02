@@ -1,0 +1,10 @@
+<div class="todo">
+  <input *ngIf="toDo" type="checkbox" id="todoCheckbox" [(ngModel)]="toDo.completed" (click)="markAsComplated()">
+
+  <label *ngIf="!isEditable" for="todoCheckbox">{{toDo?.content}}</label>
+  <input *ngIf="toDo && isEditable" type="text" [(ngModel)]="toDo.content" class="form_input">
+  <div class="buttons-container">
+    <button id="editButton" (click)="showEdit()">Edit</button>
+    <button *ngIf="toDo" id="removeButton" class="remove" (click)="removeTodo()">Remove</button>
+  </div>
+</div>
