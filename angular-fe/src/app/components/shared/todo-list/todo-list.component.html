@@ -1,14 +1,19 @@
 <div class="todo-list-view">
   <div class="title">TODO LIST</div>
 
-  <div class="creation-form"> 
-    <input type="text" [(ngModel)]="newToDo" class="form_input" (keyup.enter)="addTodo(newToDo)"> 
+  <div class="creation-form">
+    <input
+      type="text"
+      [(ngModel)]="newToDo"
+      class="form_input"
+      (keyup.enter)="addTodo(newToDo)"
+    >
     <button (click)="addTodo(newToDo)" class="button-3">Add Todo</button>
   </div>
 
   <div *ngFor="let todo of todos">
     <app-todo [toDo]="todo" (removeEvent)="removeTodo($event)"></app-todo>
   </div>
-  <app-todo-counter [todoCounter]="unComplatedCount()"></app-todo-counter>
+  <app-todo-counter [todoCounter]="countIncompleteTask()"></app-todo-counter>
 
 </div>

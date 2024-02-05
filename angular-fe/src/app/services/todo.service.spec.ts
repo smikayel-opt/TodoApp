@@ -1,8 +1,7 @@
-import { TestBed } from '@angular/core/testing';
-
-import { IToDo, TodoService } from './todo.service';
+import { TodoService } from './todo.service';
 import { HttpClient } from '@angular/common/http';
 import { of, throwError } from 'rxjs';
+import { IToDo } from './types/todo';
 
 
 describe('TodoService', () => {

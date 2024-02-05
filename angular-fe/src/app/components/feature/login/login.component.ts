@@ -16,12 +16,21 @@ export class LoginComponent {
 
   constructor(private authService: AuthService, private router: Router) { }
 
-  login() {
-    if (!this.username || !this.password) return
-    this.authService.login({ username: this.username, password: this.password }).subscribe((authRes: IAuth) => {
-      localStorage.setItem('token', 'Bearer ' + authRes.token)
-    })
-
-    this.router.navigate(['/'])
+  /**
+   * login handler to be able to login the userSS
+   * @returns 
+   */
+  login(): void {
+    if (!this.username || !this.password) return;
+  
+    const loginObservable = this.authService.login({ username: this.username, password: this.password });
+  
+    if (loginObservable) {
+      loginObservable.subscribe((authRes: IAuth) => {
+        localStorage.setItem('token', 'Bearer ' + authRes.token);
+      });
+    }
+  
+    this.router.navigate(['/']);
   }
 }

@@ -1,7 +1,8 @@
 import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { IToDo, TodoService } from '../../../services/todo.service';
+import { IToDo } from '@app/services/types/todo';
+import { TodoService } from '@services/todo.service';
 
 
 @Component({
@@ -19,7 +20,7 @@ export class TodoComponent {
   constructor(private todoService: TodoService) { }
 
   /**
-   * will understand showld show the edit button or no
+   * will understand should show the edit button or no
    * if there is clicked edit button after editing the content it will 
    * change todo with service
    */

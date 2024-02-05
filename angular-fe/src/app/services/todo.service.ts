@@ -1,13 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
+import { IToDo } from './types/todo';
 
-
-export interface IToDo {
-  id?: string
-  content: string
-  completed: boolean
-}
 
 @Injectable({
   providedIn: 'root'

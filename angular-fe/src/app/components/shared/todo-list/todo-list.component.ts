@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
-import { TodoComponent } from '../todo/todo.component';
-import { TodoCounterComponent } from '../todo-counter/todo-counter.component';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { IToDo, TodoService } from '../../../services/todo.service';
+import { TodoService } from '@services/todo.service';
+import { IToDo } from '@app/services/types/todo';
+import { TodoComponent } from '../todo/todo.component';
+import { TodoCounterComponent } from '../todo-counter/todo-counter.component';
 
 @Component({
   selector: 'app-todo-list',
@@ -16,7 +17,9 @@ export class TodoListComponent {
   todos: IToDo[] = []
   newToDo: string = ''
 
-  constructor(public todoService: TodoService) { }
+  constructor(
+    public todoService: TodoService
+  ) { }
 
   ngOnInit() {
     this.getTodos()
@@ -52,8 +55,10 @@ export class TodoListComponent {
    * @param todoToRemove todo object which should be removed
    * @returns 
    */
-  removeTodo(todoToRemove: IToDo) {
-    if (!todoToRemove.id) return
+  removeTodo(todoToRemove: IToDo): void {
+    if (!todoToRemove.id) {
+      return
+    }
     this.todoService.removeTodo(todoToRemove.id).subscribe(() => {
       this.todos = this.todos.filter(todo => todo !== todoToRemove);
     })
@@ -63,7 +68,7 @@ export class TodoListComponent {
    * will count the uncompleted todos count
    * @returns number: todos count
    */
-  unComplatedCount() {
+  countIncompleteTask() {
     return this.todos.filter(todo => !todo.completed).length;
   }
 }

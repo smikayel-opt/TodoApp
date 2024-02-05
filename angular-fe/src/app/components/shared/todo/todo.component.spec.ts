@@ -1,5 +1,6 @@
 import { TodoComponent } from './todo.component';
-import { IToDo, TodoService } from '../../../services/todo.service';
+import { TodoService } from '@services/todo.service';
+
 
 describe('TodoComponent', () => {
   let component: TodoComponent;
@@ -9,7 +10,6 @@ describe('TodoComponent', () => {
     todoService = jasmine.createSpyObj('TodoService', ['getAllTodos', 'addTodo', 'removeTodo', 'editTodo']);
     component = new TodoComponent(todoService);
   });
-
 
   it('should create', () => {
     expect(component).toBeTruthy();

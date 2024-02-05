@@ -4,6 +4,11 @@
   "compilerOptions": {
     "outDir": "./dist/out-tsc",
     "forceConsistentCasingInFileNames": true,
+    "baseUrl": "./src", // Set the base directory for your aliases
+    "paths": {
+      "@app/*": ["app/*"], // Map '@app/*' to 'app/*'
+      "@services/*": ["app/services/*"] // Map '@services/*' to 'app/services/*'
+    },
     "strict": true,
     "noImplicitOverride": true,
     "noPropertyAccessFromIndexSignature": true,
@@ -22,7 +27,7 @@
     "lib": [
       "ES2022",
       "dom"
-    ]
+    ],
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,

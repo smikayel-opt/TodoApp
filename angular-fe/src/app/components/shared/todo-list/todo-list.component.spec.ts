@@ -1,16 +1,17 @@
 
 
+import { of } from 'rxjs';
+import { TodoService } from '@services/todo.service';
+import { getMockTodoService } from '@services/todo.service.mock';
 import { TodoListComponent } from './todo-list.component';
-import { IToDo, TodoService } from '../../../services/todo.service';
-import { of, throwError } from 'rxjs';
-import { fakeAsync, tick } from '@angular/core/testing';
+import { IToDo } from '@app/services/types/todo';
 
 describe('TodoListComponent', () => {
   let component: TodoListComponent;
   let mockTodoService: jasmine.SpyObj<TodoService>;
 
   beforeEach(() => {
-    mockTodoService = jasmine.createSpyObj('TodoService', ['getAllTodos', 'addTodo', 'removeTodo', 'editTodo']);
+    mockTodoService = getMockTodoService();
     component = new TodoListComponent(mockTodoService);
   });
 
@@ -86,7 +87,7 @@ describe('TodoListComponent', () => {
   });
 
 
-  describe('unComplatedCount', () => {
+  describe('unCompletedCount', () => {
     it('should return the count of uncompleted todos', () => {
       component.todos = [
         { id: '5', content: 'Todo 1', completed: false },
@@ -94,7 +95,7 @@ describe('TodoListComponent', () => {
         { id: '7', content: 'Todo 3', completed: false }
       ];
 
-      const result = component.unComplatedCount();
+      const result = component.countIncompleteTask();
 
       expect(result).toEqual(2);
     });
