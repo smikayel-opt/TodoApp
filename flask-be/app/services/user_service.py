@@ -30,7 +30,7 @@ def create_user(username, password):
 
 def authenticate_user(username, password):
     """
-
+    will authenticate user
     @param username: inputted username from the user
     @param password: inputted password from the user
     @return: the response for the auth action it can have error whit short message
