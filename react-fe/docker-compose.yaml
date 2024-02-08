@@ -1,9 +1,0 @@
-services:
-  react-fe:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    container_name: ReactFe
-    ports: 
-      - '3000:3000'
-  
