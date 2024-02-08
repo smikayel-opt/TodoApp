@@ -10,7 +10,7 @@ def init_todo_routes(app):
     @param app: flask application
     @return:
     """
-    @app.route('/')
+    @app.route('/api/todos/')
     @login_required
     def index(user):
         """
@@ -20,7 +20,7 @@ def init_todo_routes(app):
         saved_todos = get_all_todos()
         return jsonify(saved_todos), 200
 
-    @app.route('/', methods=['POST'])
+    @app.route('/api/todos/', methods=['POST'])
     def add_todo():
         """
         the handler for the add todo route
@@ -30,7 +30,7 @@ def init_todo_routes(app):
         save_todo(todo)
         return jsonify(todo_serializer(todo)), 200
 
-    @app.route('/<oid>', methods=['PUT'])
+    @app.route('/api/todos/<oid>', methods=['PUT'])
     def complete(oid):
         """
         route handler for mark as completed request
@@ -44,7 +44,7 @@ def init_todo_routes(app):
         update_one_todo(todo_item)
         return jsonify(todo_serializer(todo_item)), 200
 
-    @app.route('/<oid>', methods=['DELETE'])
+    @app.route('/api/todos/<oid>', methods=['DELETE'])
     def delete_one(oid):
         """
         route handler for delete one it's will call database service and then will delete todo

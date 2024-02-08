@@ -1,13 +1,16 @@
 from flask import request, jsonify, send_file
-import io
-from PIL import Image
+import io, os
+from werkzeug.utils import secure_filename
+from python_magic_file import MagicFile
 from .utils.constants import SUPPORTED_IMAGE_EXTENSIONS
 from services.image_service import handle_image_save, get_image_by_oid
+from middleware.login_required_middleware import login_required
 
 
 def init_image_processing_routes(app):
-    @app.route('/images/', methods=['POST'])
-    def add_image():
+    @app.route('/api/images/', methods=['POST'])
+    @login_required
+    def add_image(user):
         """
         handler for /images route, will save the image in backend,
         for optimization it will save image with low resolution
@@ -15,25 +18,26 @@ def init_image_processing_routes(app):
         """
         file_storage = request.files['file']
         if not request.files or not file_storage:
-            return jsonify({'error': 'No file received'}), 401
+            return jsonify({'error': 'No file received'}), 400
 
         try:
             file = file_storage.read()
-            filename = file_storage.filename
-            root_name, file_extension = filename.split('.')
+            image_bytearray = io.BytesIO(file)
+
+            magic_file = MagicFile(image_bytearray)
+            filename, _ = os.path.splitext(secure_filename(file_storage.filename))
+            file_extension = magic_file.get_extension()
 
             if file_extension not in SUPPORTED_IMAGE_EXTENSIONS:
-                return jsonify({'error': 'Not supported file extensions'}), 401
+                return jsonify({'error': 'Not supported file extensions'}), 400
 
-            image_bytearray = io.BytesIO(file)
-            image = Image.open(image_bytearray)
-            handle_image_save(image, root_name)
+            handle_image_save(image_bytearray, filename, file_extension, user)
             return jsonify(
                 {'status': 'success', 'message': 'Image saved successfully'})
         except Exception as e:
             return jsonify({'error': 'Failed to process the image', 'details': str(e)})
 
-    @app.route('/images/<oid>', methods=['get'])
+    @app.route('/api/images/<oid>', methods=['get'])
     def handle_get_image_by_oid(oid):
         """
         handler for the /images/<:oid>

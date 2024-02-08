@@ -1,19 +1,24 @@
 from flask import current_app
+import io
 from bson.binary import Binary
 from bson.objectid import ObjectId
 from .utils.image_resolution import change_image_resolution
 
 
-def handle_image_save(image, root_name):
+def handle_image_save(image_byte_array, file_name, original_file_ext, user):
     """
     @param image: image binary data
     @param root_name: name of the image without extension
     """
-    output_name = f'{root_name}.jpg'
-    optimized_image = change_image_resolution(image)
+    optimized_image = change_image_resolution(image_byte_array)
 
     db = current_app.config['db'].todos
-    db.image.insert_one({'filename': output_name, 'image': Binary(optimized_image.getvalue())})
+    db.image.insert_one({
+        'filename': file_name,
+        'image': Binary(optimized_image.getvalue()),
+        'file_extension': original_file_ext,
+        'user': user['_id']
+    })
 
 
 def get_image_by_oid(oid):
