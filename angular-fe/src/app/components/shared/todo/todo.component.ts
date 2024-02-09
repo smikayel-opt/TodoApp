@@ -41,7 +41,7 @@ export class TodoComponent {
   /**
    * will make call to the backend and will mark todo as completed
    */
-  markAsComplated(): void {
+  markAsCompleted(): void {
     if (!this.toDo) return
     this.toDo.completed = !this.toDo?.completed
     this.todoService.editTodo(this.toDo).subscribe()

@@ -1,3 +1,4 @@
+import { IToDo } from '@app/services/types/todo';
 import { TodoComponent } from './todo.component';
 import { TodoService } from '@services/todo.service';
 
@@ -40,6 +41,13 @@ describe('TodoComponent', () => {
       spyOn(component.removeEvent, 'emit');
       component.removeTodo();
       expect(component.removeEvent.emit).toHaveBeenCalledWith(toDoMock);
+    });
+  });
+
+  describe('markAsComplated', () => {
+    it('should not call editTodo if todo does not exist', () => {
+      component.markAsCompleted();
+      expect(todoService.editTodo).not.toHaveBeenCalled();
     });
   });
 });

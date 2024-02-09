@@ -1,0 +1,8 @@
+.image-upload {
+    display: flex;
+    flex-direction: column;
+}
+
+.error-container {
+    color: rgb(129, 19, 19);
+}

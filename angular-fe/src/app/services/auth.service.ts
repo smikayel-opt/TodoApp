@@ -15,7 +15,7 @@ export interface IAuth {
   providedIn: 'root'
 })
 export class AuthService {
-  API_URL = 'http://localhost:5000/'
+  API_URL = 'http://localhost:5000/api/'
   loggedIn: boolean = false;
 
   constructor(public http: HttpClient) { }
@@ -49,5 +49,4 @@ export class AuthService {
     }
     return this.loggedIn;
   }
-
 }
