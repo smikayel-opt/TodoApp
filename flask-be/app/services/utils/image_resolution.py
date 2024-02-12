@@ -61,6 +61,5 @@ def resize_image(image_data, target_width=None, target_height=None, output_forma
     # Convert image to bytes
     resized_image_bytes = io.BytesIO()
     image.save(resized_image_bytes, format=output_format.upper())
-    resized_image_bytes.seek(0)
 
     return resized_image_bytes
