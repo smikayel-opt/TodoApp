@@ -43,21 +43,20 @@ def resize_image(image_data, target_width=None, target_height=None, output_forma
 
     target_width = int(target_width) if target_width else None
     target_height = int(target_height) if target_height else None
-
     # Open the image from the image data
     image = Image.open(io.BytesIO(image_data['image']))
 
-    # Resize the image if both target width and height are provided
-    if target_width and target_height:
-        image.thumbnail((target_width, target_height))
-    elif target_width:
-        width_percent = target_width / float(image.size[0])
-        target_height = int(float(image.size[1]) * width_percent)
-        image = image.resize((target_width, target_height))
-    elif target_height:
-        height_percent = target_height / float(image.size[1])
-        target_width = int(float(image.size[0]) * height_percent)
-        image = image.resize((target_width, target_height))
+    # Calculate aspect ratio
+    width_ratio = target_width / float(image.size[0]) if target_width else 1
+    height_ratio = target_height / float(image.size[1]) if target_height else 1
+    aspect_ratio = min(width_ratio, height_ratio)
+
+    # Calculate new size based on aspect ratio
+    new_width = int(image.size[0] * aspect_ratio)
+    new_height = int(image.size[1] * aspect_ratio)
+
+    # Resize the image
+    image = image.resize((new_width, new_height))
 
     # Convert image to bytes
     resized_image_bytes = io.BytesIO()
