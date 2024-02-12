@@ -9,7 +9,7 @@ import { IToDo } from './types/todo';
 })
 export class TodoService {
   // switched to public to be able to access it in spec file.
-  API_URL = 'http://localhost:5000/'
+  API_URL = 'http://localhost:5000/api/todos/'
 
   constructor(
     public http: HttpClient,

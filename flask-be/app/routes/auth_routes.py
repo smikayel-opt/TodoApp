@@ -21,7 +21,7 @@ def init_auth_routes(app):
             return {"error": "Username or password are not provided!"}
         auth_res = authenticate_user(username, password)
         if 'error' in auth_res:
-            return auth_res, 400
+            return auth_res, 401
         return auth_res, 200
 
     @app.route('/api/sign-up', methods=['POST'])

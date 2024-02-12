@@ -9,6 +9,9 @@ def get_all_todos():
     """
     db = current_app.config['db'].todos
     todos = list(db.todos.find())
+    for todo in todos:
+        todo['id'] = str(todo['_id'])
+        del todo['_id']
     return todos
 
 

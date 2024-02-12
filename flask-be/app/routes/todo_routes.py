@@ -11,8 +11,7 @@ def init_todo_routes(app):
     @return:
     """
     @app.route('/api/todos/')
-    @login_required
-    def index(user):
+    def index():
         """
         the handler for the get all todos
         @return: response object and the status of the response

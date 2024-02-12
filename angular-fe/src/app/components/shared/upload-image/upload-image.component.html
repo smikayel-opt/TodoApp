@@ -1,0 +1,7 @@
+<div class="image-upload">
+  <span class="error-container">{{error}}</span>
+  <div>
+    <input type="file" (change)="onSelectFile($event)" accept="image/*" multiple #fileInput>
+    <button (click)="uploadImage()">Upload</button>
+  </div>
+</div>
