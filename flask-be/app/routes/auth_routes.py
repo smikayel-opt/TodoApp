@@ -9,7 +9,7 @@ def init_auth_routes(app):
     @param app: flask app
     @return:
     """
-    @app.route('/login', methods=['POST'])
+    @app.route('/api/login', methods=['POST'])
     def auth_index():
         """
         the handler for the login route
@@ -24,7 +24,7 @@ def init_auth_routes(app):
             return auth_res, 400
         return auth_res, 200
 
-    @app.route('/sign-up', methods=['POST'])
+    @app.route('/api/sign-up', methods=['POST'])
     def sign_up():
         """
         the handler for the sign-up route
